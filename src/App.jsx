@@ -35,20 +35,22 @@ const handleClick = (imgUrl) => {
 };
  
    useEffect (()=>{
-    const abortController = new AbortController();
+      const abortController = new AbortController();
       const getData = async() => {
         try {
-      setIsLoading(true);
-      const data = await fetchResults(query, page, abortController.signal);
-      setResults(prev => [...prev, ...data.results]);
-      setTotalPages(data.total_pages)
-      } catch (error) {
-      console.log(error);
-      setIsError(true);
-      toast.error('Please, try again')
-      } finally {
-      setIsLoading(false);
-      }
+          if(query){
+            setIsLoading(true);
+            const data = await fetchResults(query, page, abortController.signal);
+            setResults(prev => [...prev, ...data.results]);
+            setTotalPages(data.total_pages)
+          }
+        } catch (error) {
+          console.log(error);
+          setIsError(true);
+          toast.error('Please, try again')
+        } finally {
+          setIsLoading(false);
+        }
      }
     getData();
     return () => {
@@ -59,17 +61,21 @@ const handleClick = (imgUrl) => {
    const handleChangeQuery = (newQuery) => {
     setQuery(newQuery);
     setResults([]);
-    setPage(0);
+    setPage(1);
    }
 
+   const nextPage = ()  =>{
+      setPage(page+1)
+   }
   return (
   <>
     <SearchBar handleChangeQuery={handleChangeQuery}/>
-    {!isLoading && !isError && <ErrorMessage />}
+    {isError && <ErrorMessage />}
+    <Toaster />
     <ImageModal isOpen={modalIsOpen} onRequestClose={closeModal} selected={selected}/>
     <ImageGallery results = {results} handleClick={handleClick}/>
     {isLoading && <Loader />}
-    {page < totalPages && !isLoading && <LoadMoreBtn setPage={setPage} page={page}/>}
+    {page < totalPages && !isLoading && <LoadMoreBtn setPage={nextPage} page={page}/>}
 
   </>
   )

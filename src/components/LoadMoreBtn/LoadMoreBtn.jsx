@@ -1,9 +1,9 @@
 import css from './LoadMoreBtn.module.css'
 
-const LoadMoreBtn = ({ setPage, page }) => {
+const LoadMoreBtn = ({  nextPage, page }) => {
     return (
         <div className={css.box}>
-          <button className={css.btn} onClick={()=>setPage(page+1)}>Load more</button>
+          <button className={css.btn} onClick={()=>nextPage(page+1)}>Load more</button>
         </div>
     )
 }
