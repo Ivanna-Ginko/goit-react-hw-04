@@ -75,7 +75,7 @@ const handleClick = (imgUrl) => {
     <ImageModal isOpen={modalIsOpen} onRequestClose={closeModal} selected={selected}/>
     <ImageGallery results = {results} handleClick={handleClick}/>
     {isLoading && <Loader />}
-    {page < totalPages && !isLoading && <LoadMoreBtn setPage={nextPage} page={page}/>}
+    {page < totalPages && !isLoading && <LoadMoreBtn nextPage={nextPage} page={page}/>}
 
   </>
   )
