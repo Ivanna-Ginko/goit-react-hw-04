@@ -13,15 +13,15 @@ const SearchBar = ({ handleChangeQuery }) => {
     }
 
     return(
-        <div className={CSS.box}> 
+        <header className={css.box}> 
         <Formik onSubmit={handleSubmit} initialValues={initialValues}>
-            <Form className={CSS.form}>
-                <Field className={CSS.field} name='query'/>
-                <button className={CSS.btn} type='submit'>Search</button>
+            <Form className={css.form}>
+                <Field className={css.field} name='query' placeholder='your query'/>
+                <button className={css.btn} type='submit'>Search</button>
                 
             </Form>
         </Formik>
-        </div>
+        </header>
     )
 }
 
