@@ -1,4 +1,4 @@
-import css from './imageCard.module.css'
+import css from './ImageCard.module.css'
 
 const ImageCard = ({ handleClick, item }) => {
     return (
